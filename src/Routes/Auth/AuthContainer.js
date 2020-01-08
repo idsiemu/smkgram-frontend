@@ -10,12 +10,13 @@ export default () => {
     const name = useInput("");
     const firstName = useInput("");
     const lastName = useInput("");
+    const secret = useInput("");
     const email = useInput("");
     const [requestSecretMutation] = useMutation(LOG_IN, {
         variables: { email: email.value }
       });
 
-    const createAccountMutation = useMutation(CREATE_ACCOUNT, {
+    const [createAccountMutation] = useMutation(CREATE_ACCOUNT, {
         variables: {
             email:email.value,
             name: name.value,
@@ -29,25 +30,32 @@ export default () => {
         if(action === "logIn") {
             if(email !== ""){
                 try {
-                    const { requestSecret} = await requestSecretMutation();
+                    const {data:
+                        {requestSecret}
+                    } = await requestSecretMutation();
                     if(!requestSecret){
                         toast.error("You dont have an account yet, create one");
                         setTimeout(() => setAction("signUp"), 2000);
+                    }else{
+                        toast.success("Check your inbox for your login secret");
+                        setAction("confirm");
                     }
                 } catch {
-                    toast.error("Can't request secret, try again")
+                    toast.error("Can't request secret, try again");
                 }
             }else{
                 toast.error("Email is required");
             }
-        }else if(action === "SingUp"){
+        }else if(action === "signUp"){
             if(email.value !== "" &&
                name.value !== "" &&
                firstName.value !== "" &&
                lastName.value !== ""
             ){
                 try{
-                    const {createAccount} = await createAccountMutation();
+                    const {
+                        data:{createAccount}
+                    } = await createAccountMutation();
                     if(!createAccount){
                         toast.error("Can't create account");
                     }else{
@@ -71,6 +79,7 @@ export default () => {
             firstName={firstName}
             lastName={lastName}
             email={email}
+            secret={secret}
             onSubmit={onSubmit}
         />
     );
