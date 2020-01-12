@@ -85,9 +85,11 @@ export default () => {
                     } = await confirmSecretMutation();
                     if(token !== "" && token !== undefined){
                         localLogInMutation({variables: {token}});
+                    } else {
+                        throw Error();
                     }
                 }catch{
-                    toast.error("Cant confirm secret");
+                    toast.error("Cant confirm secret, check again");
                 }
             }
         }
