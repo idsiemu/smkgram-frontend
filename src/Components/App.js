@@ -4,7 +4,7 @@ import styled, {ThemeProvider} from "styled-components";
 import { HashRouter as Router} from "react-router-dom";
 import GlobalStyles from "../Styles/GlobalStyles";
 import Theme from '../Styles/Theme';
-import Routes from "./Router";
+import Routes from "./Routes";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useQuery} from "react-apollo-hooks";
@@ -34,7 +34,7 @@ export default () => {
           <>
           <Header/>
           <Wrapper>
-            <Router isLoggedIn={isLoggedIn}></Router>
+            <Routes isLoggedIn={isLoggedIn}/>
             <Footer/>
           </Wrapper>
           </>
