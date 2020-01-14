@@ -7,15 +7,23 @@ import Explore from "../Routes/Explore";
 import Search from "../Routes/Search";
 import Profile from "../Routes/Profile";
 
-const LoggedInRoutes = () => 
-    <>
+const LoggedInRoutes = () => (
+    // 여기서 Switch 는 하나의 라우트만 렌더링해줌
+    <Switch>
         <Route exact path="/" component={Feed}/>
         <Route path="/explore" component={Explore} />
-        <Route path="search" component={Search}/>
+        <Route path="/search" component={Search}/>
         <Route path="/:username" component={Profile} />
-    </>
-const LoggedOutRoutes = () => <><Route exact path="/" component={Auth}/></>
-const AppRouter = ({isLoggedIn}) => <Switch>{isLoggedIn ? <LoggedInRoutes/> : <LoggedOutRoutes/>}</Switch>
+    </Switch>
+);
+
+const LoggedOutRoutes = () => (
+    <Switch>
+        <Route exact path="/" component={Auth}/>
+    </Switch>
+);
+const AppRouter = ({isLoggedIn}) => 
+    isLoggedIn ? <LoggedInRoutes/> : <LoggedOutRoutes/>;
 
 AppRouter.prototype = {
     isLoggedIn: PropTypes.bool.isRequired
