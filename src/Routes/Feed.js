@@ -54,6 +54,8 @@ export default () => {
                 <Post
                     key={post.id}
                     id={post.id}
+                    location={post.location}
+                    caption={post.caption}
                     user={post.user}
                     files={post.files}
                     likeCount={post.likeCount}
