@@ -29,6 +29,8 @@ const PostContainer = ({
             newComment={comment}
             setIsLiked={setIsLiked}
             setLikeCount={setLikeCount}
+            caption={caption}
+            location={location}
         />
     );
 };

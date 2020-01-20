@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import FatText from "../FatText";
 import Avatar from "../Avatar";
+import { HeartEmpty, HeartFull, Comment } from "../Icons";
 
 const Post = styled.div`
     ${props => props.theme.whiteBox};
@@ -9,13 +10,49 @@ const Post = styled.div`
     max-width:600px;
 `;
 
-const Header = styled.header``;
+const Header = styled.header`
+    padding:15px;
+    display:flex;
+    align-items:center;
+`;
 
-const UserColumn = styled.div``;
+const UserColumn = styled.div`
+    margin-left:5px;
+`;
 
-const Location = styled.div``;
+const Location = styled.div`
+    display:block;
+    margin-top:5px;
+    font-size:12px;
+`;
 
-export default ({user:{name, avatar}, location}) => (
+const Files = styled.div`
+
+`;
+
+const File = styled.img`
+    max-width:100%;
+`;
+
+const Button = styled.span`
+    cursor: pointer;
+`;
+
+const Meta = styled.div`
+    padding:15px;
+`;
+
+const Buttons = styled.div`
+    ${Button}{
+        &:first-child{
+            margin-right: 10px;
+        }
+    }
+    margin-bottom: 10px;
+`;
+
+
+export default ({user:{name, avatar}, location, files, isLiked}) => (
     <Post>
         <Header>
             <Avatar size="sm" url={avatar}/>
@@ -24,5 +61,16 @@ export default ({user:{name, avatar}, location}) => (
                 <Location>{location}</Location>
             </UserColumn>
         </Header>
+        <Files>
+            {files && files.map(file => <File id={file.id} src={file.url}/>)}
+        </Files>
+        <Meta>
+            <Buttons>
+                <Button>
+                    {isLiked ? <HeartFull/> : <HeartEmpty/>}
+                </Button>
+                <Button><Comment /></Button>
+            </Buttons>
+        </Meta>
     </Post>
 );
