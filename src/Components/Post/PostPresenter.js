@@ -51,8 +51,25 @@ const Buttons = styled.div`
     margin-bottom: 10px;
 `;
 
+const Timestamp = styled.span`
+    font-weight:400;
+    text-transfrom: uppercase;
+    opacity: 0.5;
+    display:block;
+    font-size:12px;
+    margin: 10px 0px;
+    padding-bottom: 10px;
+    border-bottom: ${props => props.theme.lightGreyColor} 1px solid;
+`;
 
-export default ({user:{name, avatar}, location, files, isLiked}) => (
+export default ({
+    user:{name, avatar},
+    location,
+    files,
+    isLiked,
+    likeCount,
+    createdAt
+}) => (
     <Post>
         <Header>
             <Avatar size="sm" url={avatar}/>
@@ -69,8 +86,12 @@ export default ({user:{name, avatar}, location, files, isLiked}) => (
                 <Button>
                     {isLiked ? <HeartFull/> : <HeartEmpty/>}
                 </Button>
-                <Button><Comment /></Button>
+                <Button>
+                    <Comment />
+                </Button>
             </Buttons>
+            <FatText text={likeCount === 1 ? "1 like": `${likeCount} likes`} />
+            <Timestamp>{createdAt}</Timestamp>
         </Meta>
     </Post>
 );
