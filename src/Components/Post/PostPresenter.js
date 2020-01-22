@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import TextareaAutosize from 'react-autosize-textarea';
 import FatText from "../FatText";
 import Avatar from "../Avatar";
 import { HeartEmpty, HeartFull, Comment } from "../Icons";
@@ -8,6 +9,7 @@ const Post = styled.div`
     ${props => props.theme.whiteBox};
     width:100%;
     max-width:600px;
+    margin-bottom: 25px;
 `;
 
 const Header = styled.header`
@@ -59,8 +61,9 @@ const Timestamp = styled.span`
     font-size:12px;
     margin: 10px 0px;
     padding-bottom: 10px;
-    border-bottom: ${props => props.theme.lightGreyColor} 1px solid;
+    border-bottom: ${props => props.theme.darkGreyColor} 1px solid;
 `;
+
 
 export default ({
     user:{name, avatar},
@@ -79,7 +82,7 @@ export default ({
             </UserColumn>
         </Header>
         <Files>
-            {files && files.map(file => <File id={file.id} src={file.url}/>)}
+            {files && files.map(file => <File key={file.id} src={file.url}/>)}
         </Files>
         <Meta>
             <Buttons>
@@ -92,6 +95,7 @@ export default ({
             </Buttons>
             <FatText text={likeCount === 1 ? "1 like": `${likeCount} likes`} />
             <Timestamp>{createdAt}</Timestamp>
+            <TextareaAutosize />
         </Meta>
     </Post>
 );
