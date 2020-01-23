@@ -29,11 +29,21 @@ const Location = styled.div`
 `;
 
 const Files = styled.div`
-
+    position: relative;
+    padding-top:100%;
 `;
 
 const File = styled.img`
     max-width:100%;
+    width:100%;
+    height:600px;
+    position:absolute;
+    top:0;
+    background-image: url(${props => props.src});
+    background-size: cover;
+    background-position: center;
+    opacity: ${props => (props.showing ? 1 : 0)};
+    transition:opacity 0.5s linear;
 `;
 
 const Button = styled.span`
@@ -64,6 +74,15 @@ const Timestamp = styled.span`
     border-bottom: ${props => props.theme.darkGreyColor} 1px solid;
 `;
 
+const Textarea = styled(TextareaAutosize)`
+    border: none;
+    width: 100%;
+    resize:none;
+    font-size:14px;
+    &:focus {
+        outline: none;
+    }
+`;
 
 export default ({
     user:{name, avatar},
@@ -71,7 +90,9 @@ export default ({
     files,
     isLiked,
     likeCount,
-    createdAt
+    createdAt,
+    newComment,
+    currentItem
 }) => (
     <Post>
         <Header>
@@ -82,7 +103,7 @@ export default ({
             </UserColumn>
         </Header>
         <Files>
-            {files && files.map(file => <File key={file.id} src={file.url}/>)}
+            {files && files.map((file, index) => <File key={file.id} src={file.url} showing={index === currentItem}/>)}
         </Files>
         <Meta>
             <Buttons>
@@ -95,7 +116,7 @@ export default ({
             </Buttons>
             <FatText text={likeCount === 1 ? "1 like": `${likeCount} likes`} />
             <Timestamp>{createdAt}</Timestamp>
-            <TextareaAutosize />
+            <Textarea placeholder={"Add a comment"} {...newComment}/>
         </Meta>
     </Post>
 );
