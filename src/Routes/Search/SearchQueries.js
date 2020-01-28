@@ -1,6 +1,6 @@
 import {gql} from "apollo-boost";
 
-export const SEARCH_POSTS = gql`
+export const SEARCH = gql`
     query search($term:String!){
         searchPost(term:$term){
             files {

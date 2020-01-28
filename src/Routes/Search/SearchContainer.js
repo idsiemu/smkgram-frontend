@@ -8,5 +8,5 @@ import {SEARCH} from "./SearchQueries";
 export default withRouter(({location: {search}}) => {
     const searchTerm = search.split("=")[1];
     const {data, loading} = useQuery(SEARCH);
-    return <SearchPresenter searchTerm={searchTerm} />;
+    return <SearchPresenter searchTerm={searchTerm} loading={loading} data={data}/>;
 });
