@@ -8,14 +8,15 @@ const Wrapper = styled.div`
     text-align: center;
 `;
 
-const SearchPresenter = ({searchTerm}) => (
+const SearchPresenter = ({searchTerm, loading}) => (
     <Wrapper>
         {searchTerm === undefined && <FatText text={"Search for something"}/>}
     </Wrapper>
 );
 
 SearchPresenter.propTypes = {
-    searchTerm: PropTypes.string
+    searchTerm: PropTypes.string,
+    loading: PropTypes.bool
 };
 
 export default SearchPresenter;
