@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import FatText from "../../Components/FatText";
 import Loader from "../../Components/Loader";
 import UserCard from "../../Components/UserCard";
+import SquarePost from "../../Components/SquarePost"
 
 const Wrapper = styled.div`
     height:50vh;
@@ -46,8 +47,14 @@ const SearchPresenter = ({searchTerm, loading, data}) => {
                 {data.searchPost.length === 0 ? (
                         <FatText text="No posts found" />
                         ) : (
-                            data.searchPost.map(post => null)
-                        )}
+                            data.searchPost.map(post => (
+                            <SquarePost
+                                likeCount={post.likeCount}
+                                commentCount={post.commentCount}
+                                file={post.files[0]}
+                            />
+                        ))
+                    )}
                 </Section>
             </Wrapper>
         );
