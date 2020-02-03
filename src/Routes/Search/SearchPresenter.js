@@ -19,6 +19,12 @@ const Section = styled.div`
     grid-auto-rows: 160px;
 `;
 
+const PostSection = styled(Section)`
+    grid-template-columns: repeat(4, 200px);
+    grid-template-rows: 200px;
+    grid-auto-rows: 200px;
+`;
+
 const SearchPresenter = ({searchTerm, loading, data}) => {
     if(searchTerm === undefined){
         return <Wrapper><FatText text={"Search for something"}/></Wrapper>
@@ -43,7 +49,7 @@ const SearchPresenter = ({searchTerm, loading, data}) => {
                         ))
                     }
                 </Section>
-                <Section>
+                <PostSection>
                 {data.searchPost.length === 0 ? (
                         <FatText text="No posts found" />
                         ) : (
@@ -55,7 +61,7 @@ const SearchPresenter = ({searchTerm, loading, data}) => {
                             />
                         ))
                     )}
-                </Section>
+                </PostSection>
             </Wrapper>
         );
     }
