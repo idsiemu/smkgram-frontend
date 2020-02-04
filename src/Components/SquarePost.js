@@ -56,7 +56,6 @@ const SquarePost = ({likeCount, commentCount, file}) => (
         </Overlay>
     </Container>
 );
-console.log(23123);
 SquarePost.propTypes = {
     likeCount: PropTypes.number.isRequired,
     commentCount: PropTypes.number.isRequired,
