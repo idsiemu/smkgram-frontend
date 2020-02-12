@@ -4,6 +4,7 @@ import { gql } from "apollo-boost";
 import { withRouter } from "react-router-dom";
 import { useQuery } from "react-apollo-hooks";
 import Loader from "../Components/Loader";
+import Avatar from "../Components/Avatar";
 
 const GET_USER = gql`
     query seeUser($name: String!) {
@@ -30,14 +31,45 @@ const GET_USER = gql`
     }
 `;
 
+const Wrapper = styled.div`
+    min-height:60vh;
+`;
+
 const Header = styled.header``;
+
+const HeaderColumn = styled.div``;
 
 export default withRouter(({match: {params :{name}}}) => {
     const { data, loading } = useQuery(GET_USER, { variables: {name}});
     if(loading){
-        return <Loader />
+        return (
+            <Wrapper>
+                <Loader />
+            </Wrapper>
+        );
     } else {
-        console.log(data);
-        return null;
+        const {
+            seeUser : {
+                avatar,
+                name,
+                fullName,
+                isFollowing,
+                isSelf,
+                bio,
+                followingCount,
+                followersCount,
+                postsCount,
+                posts
+            }
+        } = data;
+        return (
+            <>
+                <Header>
+                    <HeaderColumn>
+                        <Avatar size="lg" url={avatar}/>
+                    </HeaderColumn>
+                </Header>
+            </>
+        );
     }
 });
