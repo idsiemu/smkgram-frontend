@@ -7,6 +7,7 @@ import { withRouter } from "react-router-dom";
 import FatText from "../../Components/FatText";
 import FollowButton from "../../Components/FollowButton";
 import SquarePost from "../../Components/SquarePost";
+import Button from "../../Components/Button";
 
 const Wrapper = styled.div`
     min-height:100vh;
@@ -60,7 +61,7 @@ const Posts = styled.div`
     grid-auto-rows: 200px;
 `;
 
-export default withRouter(({loading, data}) => {
+export default withRouter(({loading, data, logOut}) => {
     if(loading === true){
         return (
             <Wrapper>
@@ -94,7 +95,8 @@ export default withRouter(({loading, data}) => {
                     </HeaderColumn>
                     <HeaderColumn>
                         <UsernameRow>
-                        <Username>{name}</Username>{!isSelf && <FollowButton id={id} isFollowing={isFollowing} />}
+                        <Username>{name}</Username>
+                        {isSelf ? <Button onClick={logOut} text="Log Out"/> : <FollowButton id={id} isFollowing={isFollowing} />}
                         </UsernameRow>
                         <Counts>
                             <Count>

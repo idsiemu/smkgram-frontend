@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import Feed from "../Routes/Feed";
 import Auth from "../Routes/Auth";
 import Explore from "../Routes/Explore";
@@ -14,6 +14,7 @@ const LoggedInRoutes = () => (
         <Route path="/explore" component={Explore} />
         <Route path="/search" component={Search}/>
         <Route path="/:name" component={Profile} />
+        <Redirect from="*" to="/" />
     </Switch>
 );
 
